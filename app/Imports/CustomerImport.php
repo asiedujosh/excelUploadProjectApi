@@ -11,6 +11,13 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class CustomerImport implements ToCollection, WithBatchInserts, WithChunkReading, ShouldQueue
 {
+
+    protected $recordId;
+
+    public function __construct(array $recordId)
+    {
+        $this->recordId = $recordId;
+    }
     /**
     * @param Collection $collection
     */
@@ -20,6 +27,7 @@ class CustomerImport implements ToCollection, WithBatchInserts, WithChunkReading
         foreach ($rows as $row) 
         {
             Customer::create([
+                "recordId" => $this->recordId['recordId'],
                 "domain"=> $row[0],
                 "subDomain"=> $row[1],
                 "category"=> $row[2],

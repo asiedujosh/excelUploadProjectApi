@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('recordId')->nullable();
             $table->string('domain')->nullable();
             $table->string('subDomain')->nullable();
             $table->string('category')->nullable();
